@@ -1,17 +1,18 @@
 {% extends "encyclopedia/layout.html" %}
 
+
 {% block title %}
     Encyclopedia
 {% endblock %}
 
 {% block body %}
-    <h1>All Pages- addPage.</h1>
+   <h1>Add Encyclopedia Entry</h1>
 
     <div>
         <form method="post" action="{% url 'wiki:newpage' %}">
 		{% csrf_token %}
-		{{ tapform }}
-		<input type='submit'>
+		{{ tapform.as_p }}
+		<input type='submit' value="{{ msg }}">
 		</form>
         
     </div>

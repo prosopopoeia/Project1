@@ -28,17 +28,26 @@ def newpage(request):
             vtitle = vapform.cleaned_data["title"]
             vbody = vapform.cleaned_data["body"]
             
+            if util.get_entry(vtitle) is not None:
+                return render(request, "encyclopedia/addpage.html", {
+                "ptitle" : vtitle,
+                "pbody" : "error: entry already exists!",  
+                "msg" : "back"
+               })
+
             util.save_entry(vtitle, vbody)
             return render(request, "encyclopedia/addpage.html", {
                 "ptitle" : vtitle,
                 "pbody" : vbody,
-                "tapform" : AddPageForm()
+                "msg" : "save",
+                "tapform" : AddPageForm()               
                })
             #vtitle.append(task)
             
             
     return render(request, "encyclopedia/addpage.html", {
-        "tapform" : AddPageForm()
+        "tapform" : AddPageForm(),
+        "msg" : "save"
     })
     
 def entrypage(request, utitle = None):
