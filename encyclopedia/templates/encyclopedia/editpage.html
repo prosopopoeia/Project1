@@ -3,13 +3,12 @@
 {% block title %}
     Encyclopedia
 {% endblock %}
-
 {% block body %}
     <h1>{{ label }}: {{ dtitle }}</h1>
 	<div id="body">
-		{{ dbody|safe }}
+		{{ dbody }}
 	</div>
-	 <form method="post" action="{% url 'wiki:editpage' dtitle %}">
+	 <form method="post" action="{% url 'wiki:saveeditpage' %}">
 		{% csrf_token %}	
 		{{ tapform.as_p }}
 		<input type='submit' value="{{ msg }}">
